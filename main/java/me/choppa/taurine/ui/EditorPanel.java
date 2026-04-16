@@ -7,13 +7,8 @@ import java.awt.*;
 
 public class EditorPanel extends JPanel {
     private Font font = new Font("Monospaced", Font.PLAIN, 16);
-    private Color backgroundColor = new Color(Color.GRAY.getRGB());
+    private Color backgroundColor = new Color(75, 75, 150);
     private Color foregroundColor = new Color(Color.WHITE.getRGB());
-
-    private int lineHeight = 18;
-
-    private int distanceFromTop = 20;
-    private int distanceFromLeft = 10;
 
     private final Taurine taurine = Taurine.getInstance();
 
@@ -26,23 +21,33 @@ public class EditorPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setFont(font);
+
+        FontMetrics fontMetrics = g.getFontMetrics();
+
+        int lineHeight = fontMetrics.getHeight();
+        int ascent = fontMetrics.getAscent();
+
         setBackground(backgroundColor);
         setForeground(foregroundColor);
 
+        int distanceFromTop = 20;
         int textY = distanceFromTop;
 
-        FontMetrics metrics = g.getFontMetrics();
+        int lineCount = 1;
 
+        int gutterWidth = 30;
         for (StringBuilder stringBuilder : taurine.getBufferHandler().getLines()) {
-            g.drawString(stringBuilder.toString(), distanceFromLeft, textY);
+            g.drawString(stringBuilder.toString(), gutterWidth, textY);
+            String lineNumb = String.format("%2d", lineCount);
+            g.drawString(lineNumb, 2, textY);
+            lineCount++;
             textY += lineHeight;
         }
 
-        int charWidth = metrics.charWidth('m');
-
-        int cursorX = distanceFromLeft + taurine.getBufferHandler().getCursorColumn() * charWidth;
+        int cursorX = gutterWidth + fontMetrics.stringWidth
+                (taurine.getBufferHandler().getLines().get(taurine.getBufferHandler().getCursorRow()).toString()) + fontMetrics.charWidth('m');
         int cursorY = distanceFromTop + taurine.getBufferHandler().getCursorRow() * lineHeight;
 
-        g.drawLine(cursorX, cursorY - metrics.getAscent(), cursorX, cursorY + metrics.getDescent());
+        g.drawLine(cursorX, cursorY - ascent, cursorX, cursorY + fontMetrics.getDescent());
     }
 }
