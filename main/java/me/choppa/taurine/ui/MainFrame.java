@@ -1,12 +1,11 @@
 package me.choppa.taurine.ui;
 
+import javax.swing.*;
 import me.choppa.taurine.core.Taurine;
 import me.choppa.taurine.keys.KeyInput;
 
-import javax.swing.*;
-import java.awt.*;
-
 public class MainFrame {
+
     private EditorPanel editorPanel;
 
     public void build() {

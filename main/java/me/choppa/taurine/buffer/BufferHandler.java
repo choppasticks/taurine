@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BufferHandler {
+
     private final List<StringBuilder> lines = new ArrayList<>();
 
     private int cursorRow = 0;
