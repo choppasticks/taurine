@@ -11,7 +11,11 @@ public class KeyInput implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-
+        char c = e.getKeyChar();
+        if (!Character.isISOControl(c)) {
+            taurine.getBufferHandler().insert(c);
+            taurine.getFrame().getEditorPanel().repaint();
+        }
     }
 
     @Override
@@ -23,7 +27,6 @@ public class KeyInput implements KeyListener {
             case KeyEvent.VK_DOWN -> taurine.getBufferHandler().moveDown();
             case KeyEvent.VK_LEFT -> taurine.getBufferHandler().moveLeft();
             case KeyEvent.VK_RIGHT -> taurine.getBufferHandler().moveRight();
-            default -> taurine.getBufferHandler().insert((char) e.getKeyCode());
         }
         taurine.getFrame().getEditorPanel().repaint();
     }

@@ -14,10 +14,8 @@ public class Taurine {
         bufferHandler = new BufferHandler();
         frame = new MainFrame();
 
-        bufferHandler.getLines().add(new StringBuilder("Hello, world!"));
-        bufferHandler.getLines().add(new StringBuilder("Hello, aS!"));
-        bufferHandler.getLines().add(new StringBuilder("Hello, worSAASld!"));
-        bufferHandler.getLines().add(new StringBuilder("Hello, woAAArld!"));
+        bufferHandler.getLines().add(new StringBuilder());
+
         frame.build();
     }
 
