@@ -19,7 +19,7 @@ public class BufferHandler {
     }
 
     public BufferHandler(Path filePath, String name) {
-        //this.filePath = filePath;
+        this.filePath = filePath;
         this.name = name;
         lines.add(new StringBuilder("Hello, World!"));
     }

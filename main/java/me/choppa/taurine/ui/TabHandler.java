@@ -42,4 +42,8 @@ public class TabHandler {
     public void setSelectedTab(int index) {
         selectedTab = index;
     }
+
+    public List<BufferHandler> getTabs() {
+        return tabs;
+    }
 }

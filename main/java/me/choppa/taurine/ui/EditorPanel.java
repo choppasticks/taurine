@@ -32,21 +32,30 @@ public class EditorPanel extends JPanel {
 
         TabHandler tabHandler = taurine.getTabHandler();
 
-        Logger.getInstance().logInfo("not past null");
-
         BufferHandler buffer = tabHandler.getActiveTab();
-        if (buffer == null) {
-            return;
-        }
 
-        Logger.getInstance().logErr("past null");
+        int tabGap = 0;
+        for (BufferHandler bufferHandler : tabHandler.getTabs()) {
+            /* int x = tabGap += 30;
+            int y = 2;
+            int width = 30;
+            int height = 20;
+            if (bufferHandler == buffer) {
+                g.setColor(Color.GREEN);
+            } else {
+                g.setColor(Color.WHITE);
+            }
+            g.fillRect(x, y, width, height);
+            g.setColor(Color.BLACK);
+            g.drawString(bufferHandler.getName(), x + 5, y + 15);*/
+        }
 
         int lineHeight = fontMetrics.getHeight();
 
         setBackground(backgroundColor);
         setForeground(foregroundColor);
 
-        int distanceFromTop = 20;
+        int distanceFromTop = 40;
         int textY = distanceFromTop;
 
         int lineCount = 1;
