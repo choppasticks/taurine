@@ -25,7 +25,6 @@ public class EditorPanel extends JPanel {
         FontMetrics fontMetrics = g.getFontMetrics();
 
         int lineHeight = fontMetrics.getHeight();
-        int ascent = fontMetrics.getAscent();
 
         setBackground(backgroundColor);
         setForeground(foregroundColor);
@@ -46,25 +45,23 @@ public class EditorPanel extends JPanel {
             textY += lineHeight;
         }
 
-        int cursorX =
-            gutterWidth +
-            fontMetrics.stringWidth(
-                taurine
-                    .getBufferHandler()
-                    .getLines()
-                    .get(taurine.getBufferHandler().getCursorRow())
-                    .toString()
-            ) +
-            fontMetrics.charWidth('m');
-        int cursorY =
-            distanceFromTop +
-            taurine.getBufferHandler().getCursorRow() * lineHeight;
+        int cursorRow = taurine.getBufferHandler().getCursorRow();
+        int cursorColumn = taurine.getBufferHandler().getCursorColumn();
 
-        g.drawLine(
-            cursorX,
-            cursorY - ascent,
-            cursorX,
-            cursorY + fontMetrics.getDescent()
+        String currentLine = taurine
+            .getBufferHandler()
+            .getLines()
+            .get(cursorRow)
+            .toString();
+        String beforeCursor = currentLine.substring(
+            0,
+            Math.min(cursorColumn, currentLine.length())
         );
+
+        int cursorX = gutterWidth + fontMetrics.stringWidth(beforeCursor);
+        int cursorYTop = distanceFromTop + cursorRow * lineHeight;
+        int cursorYBottom = cursorYTop + lineHeight;
+
+        g.drawLine(cursorX, cursorYTop, cursorX, cursorYBottom);
     }
 }
