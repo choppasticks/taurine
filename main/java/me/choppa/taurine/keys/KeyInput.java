@@ -7,7 +7,7 @@ import me.choppa.taurine.editor.BufferHandler;
 
 public class KeyInput implements KeyListener {
 
-    private final Taurine taurine = new Taurine();
+    private final Taurine taurine = Taurine.getInstance();
 
     @Override
     public void keyTyped(KeyEvent e) {
