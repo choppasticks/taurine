@@ -1,25 +1,22 @@
 package me.choppa.taurine.core;
 
-import me.choppa.taurine.buffer.BufferHandler;
 import me.choppa.taurine.modes.Mode;
 import me.choppa.taurine.ui.MainFrame;
+import me.choppa.taurine.ui.TabHandler;
 
 public class Taurine {
 
     private static Taurine instance;
-    private BufferHandler bufferHandler;
     private MainFrame frame;
+    private TabHandler tabHandler;
 
     public Mode mode = Mode.EDIT;
 
     public static final String NAME = "Taurine";
 
     public void init() {
-        bufferHandler = new BufferHandler();
         frame = new MainFrame();
-
-        bufferHandler.getLines().add(new StringBuilder());
-
+        tabHandler = new TabHandler();
         frame.build();
     }
 
@@ -30,11 +27,11 @@ public class Taurine {
         return instance;
     }
 
-    public BufferHandler getBufferHandler() {
-        return bufferHandler;
-    }
-
     public MainFrame getFrame() {
         return frame;
+    }
+
+    public TabHandler getTabHandler() {
+        return tabHandler;
     }
 }

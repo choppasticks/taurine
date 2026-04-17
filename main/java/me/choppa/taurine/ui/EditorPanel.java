@@ -1,8 +1,14 @@
 package me.choppa.taurine.ui;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import javax.swing.JPanel;
+import me.choppa.logging.Logger;
 import me.choppa.taurine.core.Taurine;
+import me.choppa.taurine.editor.BufferHandler;
 
 public class EditorPanel extends JPanel {
 
@@ -24,6 +30,17 @@ public class EditorPanel extends JPanel {
 
         FontMetrics fontMetrics = g.getFontMetrics();
 
+        TabHandler tabHandler = taurine.getTabHandler();
+
+        Logger.getInstance().logInfo("not past null");
+
+        BufferHandler buffer = tabHandler.getActiveTab();
+        if (buffer == null) {
+            return;
+        }
+
+        Logger.getInstance().logErr("past null");
+
         int lineHeight = fontMetrics.getHeight();
 
         setBackground(backgroundColor);
@@ -35,9 +52,7 @@ public class EditorPanel extends JPanel {
         int lineCount = 1;
 
         int gutterWidth = 30;
-        for (StringBuilder stringBuilder : taurine
-            .getBufferHandler()
-            .getLines()) {
+        for (StringBuilder stringBuilder : buffer.getLines()) {
             g.drawString(stringBuilder.toString(), gutterWidth, textY);
             String lineNumb = String.format("%2d", lineCount);
             g.drawString(lineNumb, 2, textY);
@@ -45,14 +60,10 @@ public class EditorPanel extends JPanel {
             textY += lineHeight;
         }
 
-        int cursorRow = taurine.getBufferHandler().getCursorRow();
-        int cursorColumn = taurine.getBufferHandler().getCursorColumn();
+        int cursorRow = buffer.getCursorRow();
+        int cursorColumn = buffer.getCursorColumn();
 
-        String currentLine = taurine
-            .getBufferHandler()
-            .getLines()
-            .get(cursorRow)
-            .toString();
+        String currentLine = buffer.getLines().get(cursorRow).toString();
         String beforeCursor = currentLine.substring(
             0,
             Math.min(cursorColumn, currentLine.length())

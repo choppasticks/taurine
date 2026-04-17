@@ -1,5 +1,6 @@
-package me.choppa.taurine.buffer;
+package me.choppa.taurine.editor;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +8,20 @@ public class BufferHandler {
 
     private final List<StringBuilder> lines = new ArrayList<>();
 
+    private Path filePath;
+    private String name;
+
     private int cursorRow = 0;
     private int cursorColumn = 0;
+
+    public BufferHandler(Path filePath) {
+        this(filePath, "unsaved");
+    }
+
+    public BufferHandler(Path filePath, String name) {
+        //this.filePath = filePath;
+        this.name = name;
+    }
 
     public void moveUp() {
         if (cursorRow > 0) {
@@ -72,5 +85,13 @@ public class BufferHandler {
 
     public int getCursorColumn() {
         return cursorColumn;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Path getFilePath() {
+        return filePath;
     }
 }
