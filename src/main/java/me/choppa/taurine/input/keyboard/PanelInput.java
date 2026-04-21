@@ -1,16 +1,15 @@
-package me.choppa.taurine.keys;
+package me.choppa.taurine.input.keyboard;
 
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import me.choppa.taurine.core.Taurine;
 import me.choppa.taurine.editor.BufferHandler;
 
-public class KeyInput implements KeyListener {
+public class PanelInput extends KeyInput {
 
-    private final Taurine taurine = Taurine.getInstance();
+    protected Taurine taurine = Taurine.getInstance();
 
     @Override
-    public void keyTyped(KeyEvent e) {
+    public void onKeyTyped(KeyEvent e) {
         BufferHandler tab = taurine.getTabHandler().getActiveTab();
         char c = e.getKeyChar();
         if (!Character.isISOControl(c)) {
@@ -20,7 +19,7 @@ public class KeyInput implements KeyListener {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void onKeyPressed(KeyEvent e) {
         BufferHandler tab = taurine.getTabHandler().getActiveTab();
 
         switch (e.getKeyCode()) {
@@ -33,7 +32,4 @@ public class KeyInput implements KeyListener {
         }
         taurine.getFrame().getEditorPanel().repaint();
     }
-
-    @Override
-    public void keyReleased(KeyEvent e) {}
 }

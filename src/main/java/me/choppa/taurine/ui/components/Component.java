@@ -13,7 +13,7 @@ public abstract class Component {
         this.height = height;
     }
 
-    public abstract void paint(Graphics g);
+    public abstract void drawComponent(Graphics g);
 
     public int getX() {
         return x;

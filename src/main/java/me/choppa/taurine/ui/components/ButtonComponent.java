@@ -11,7 +11,7 @@ public class ButtonComponent extends Component {
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void drawComponent(Graphics g) {
         //g.setColor(buttonColor);
         //g.fillRect(x, y, width, height);
     }

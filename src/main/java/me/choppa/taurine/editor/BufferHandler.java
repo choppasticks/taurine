@@ -8,18 +8,18 @@ public class BufferHandler {
 
     private final List<StringBuilder> lines = new ArrayList<>();
 
-    private Path filePath;
+    private Path directory;
     private String name;
 
     private int cursorRow = 0;
     private int cursorColumn = 0;
 
-    public BufferHandler(Path filePath) {
-        this(filePath, "unsaved");
+    public BufferHandler(Path directory) {
+        this(directory, "unsaved");
     }
 
-    public BufferHandler(Path filePath, String name) {
-        this.filePath = filePath;
+    public BufferHandler(Path directory, String name) {
+        this.directory = directory;
         this.name = name;
         lines.add(new StringBuilder("Hello, World!"));
     }
@@ -92,7 +92,7 @@ public class BufferHandler {
         return name;
     }
 
-    public Path getFilePath() {
-        return filePath;
+    public Path getDirectory() {
+        return directory;
     }
 }

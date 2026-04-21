@@ -2,7 +2,6 @@ package me.choppa.taurine.ui;
 
 import javax.swing.*;
 import me.choppa.taurine.core.Taurine;
-import me.choppa.taurine.keys.KeyInput;
 
 public class MainFrame {
 
@@ -16,8 +15,6 @@ public class MainFrame {
         frame.setLocationRelativeTo(null);
         editorPanel = new EditorPanel();
         frame.add(editorPanel);
-
-        frame.addKeyListener(new KeyInput());
     }
 
     public EditorPanel getEditorPanel() {
