@@ -1,0 +1,9 @@
+*.jar
+*.class
+.idea/
+.zed/
+bin/
+build/
+.gradle/
+.settings/
+.project
